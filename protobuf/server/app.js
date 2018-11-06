@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator')
 var cors = require('cors')
+var ProtoBuf = require('protobufjs');
 
 var api = require('./routes/api');
 

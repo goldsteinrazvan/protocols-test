@@ -7,7 +7,7 @@ connection.on('open', (data)=>{
 })
 
 connection.on('message', (data)=>{
-    log(data)
+    console.log(JSON.parse(data))
     //connection.send('data')
 })
 
