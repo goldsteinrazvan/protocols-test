@@ -12,6 +12,7 @@
     "debug": "*",
     "express": "*",
     "express-validator": "*",
+    "faker": "^4.1.0",
     "morgan": "*",
     "multer": "*",
     "socket.io": "^2.1.1",

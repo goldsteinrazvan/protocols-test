@@ -6,6 +6,8 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator')
 var cors = require('cors')
 
+var generator = require('./utils/generator')
+
 var api = require('./routes/api');
 
 var app = express();
@@ -21,21 +23,16 @@ var wss = new WebSocket.Server({ port: 3000 });
 
 wss.on('connection', function connection(ws) {
     // Broadcast to everyone else.
-    setInterval(function timeout() {
+    setTimeout(function timeout() {
         wss.clients.forEach(function each(client) {
             if (client.readyState === WebSocket.OPEN) {
-              client.send('message');
+                var data = generator.generateJSON();
+                client.send(JSON.stringify(data));
             }
           });
-      }, 5000);
+      }, 10000);
     
 });
-
-wss.on('connection', (ws)=>{
-    ws.on('message', (data) =>{
-        console.log(data)
-    })
-})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
