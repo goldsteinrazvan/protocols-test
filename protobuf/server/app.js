@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator')
 var cors = require('cors')
-var ProtoBuf = require('protobufjs');
+var protobuf = require('protobufjs');
+
 
 var api = require('./routes/api');
 
@@ -14,8 +15,6 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
-
-
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
@@ -29,6 +28,24 @@ app.use(cors())
 app.options('*', cors())
 
 app.use( '/api/v1', api)
+
+app.get('/proto', (req, res)=>{
+    protobuf.load('./proto/testmessage.proto', (err, root) => {
+        
+        var TestMessage = root.lookupType('TestMessage')
+        var payload = { content: 'testcontent', name: 'testname'}
+        var errMsg = TestMessage.verify(payload)
+        if (errMsg){
+            throw Error(errMsg)
+        }
+
+        var message = TestMessage.create(payload)
+        var buffer = TestMessage.encode(message).finish();
+        res.send(buffer)
+    })
+
+    //res.send('ook');
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -44,6 +61,7 @@ app.use(function(err, req, res, next) {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
+  console.log(err)
   res.status(err.status || 500);
   res.send({errors:[{msg:'An error occured'}]});
 });
