@@ -22,6 +22,7 @@ var app = express();
             protobuf.load('./proto/testmessage.proto', (err, root)=>{
                 var TestMessage = root.lookupType('TestMessage')
                 var message = TestMessage.decode(data)
+                message = TestMessage.toObject(message)
                 console.log(message)
             })
         })

@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var expressValidator = require('express-validator')
 var cors = require('cors')
 var protobuf = require('protobufjs');
+var testdata = require('./utils/testdata')
 
 
 var api = require('./routes/api');
@@ -33,7 +34,7 @@ app.get('/proto', (req, res)=>{
     protobuf.load('./proto/testmessage.proto', (err, root) => {
         
         var TestMessage = root.lookupType('TestMessage')
-        var payload = { content: 'testcontent', name: 'testname'}
+        var payload = testdata
         var errMsg = TestMessage.verify(payload)
         if (errMsg){
             throw Error(errMsg)
@@ -43,8 +44,6 @@ app.get('/proto', (req, res)=>{
         var buffer = TestMessage.encode(message).finish();
         res.send(buffer)
     })
-
-    //res.send('ook');
 })
 
 // catch 404 and forward to error handler
