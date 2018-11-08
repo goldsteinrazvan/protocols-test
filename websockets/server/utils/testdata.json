@@ -1,0 +1,43 @@
+{
+    "_id": "5be2c52179f0bf93fdd302ef",
+    "index": 0,
+    "guid": "9297ca50-fe62-4d8c-9043-2498df92c6df",
+    "isActive": true,
+    "balance": "$3,281.24",
+    "picture": "http://placehold.it/32x32",
+    "age": 36,
+    "eyeColor": "blue",
+    "name": "Ronda Robertson",
+    "gender": "female",
+    "company": "XIXAN",
+    "email": "rondarobertson@xixan.com",
+    "phone": "+1 (881) 486-2679",
+    "address": "852 Conklin Avenue, Macdona, Vermont, 1533",
+    "about": "Et officia mollit amet pariatur excepteur anim anim consectetur et. Fugiat labore magna voluptate magna adipisicing ullamco ex magna proident Lorem. Fugiat sunt exercitation do culpa aute commodo magna consectetur ipsum fugiat. Do magna esse minim deserunt exercitation cillum. Magna consectetur consectetur id reprehenderit consequat voluptate.\r\n",
+    "registered": "2016-03-22T01:28:25 -02:00",
+    "latitude": 1.906,
+    "longitude": 113.917118,
+    "tags": [
+      "eu",
+      "sit",
+      "consectetur",
+      "eu",
+      "et",
+      "sint",
+      "do"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Violet Hale"
+      },
+      {
+        "id": 1,
+        "name": "Reese Barlow"
+      },
+      {
+        "id": 2,
+        "name": "Franklin Jenkins"
+      }
+    ]
+  }
