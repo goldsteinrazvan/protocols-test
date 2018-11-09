@@ -15,6 +15,7 @@
     "faker": "^4.1.0",
     "morgan": "*",
     "multer": "*",
+    "protobufjs": "^6.8.8",
     "ws": "^6.1.0"
   }
 }
