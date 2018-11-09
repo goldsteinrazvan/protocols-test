@@ -7,11 +7,13 @@ var expressValidator = require('express-validator')
 var cors = require('cors')
 var protobuf = require('protobufjs');
 var testdata = require('./utils/testdata')
-
-
-var api = require('./routes/api');
+var TestMessage;
 
 var app = express();
+
+protobuf.load('./proto/testmessage.proto', (err, root) => {
+    TestMessage = root.lookupType('TestMessage')
+})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,22 +30,20 @@ app.use(cors())
 
 app.options('*', cors())
 
-app.use( '/api/v1', api)
-
 app.get('/proto', (req, res)=>{
-    protobuf.load('./proto/testmessage.proto', (err, root) => {
-        
-        var TestMessage = root.lookupType('TestMessage')
-        var payload = testdata
-        var errMsg = TestMessage.verify(payload)
-        if (errMsg){
-            throw Error(errMsg)
-        }
+    var payload = testdata
+    var errMsg = TestMessage.verify(payload)
+    if (errMsg){
+        throw Error(errMsg)
+    }
 
-        var message = TestMessage.create(payload)
-        var buffer = TestMessage.encode(message).finish();
-        res.send(buffer)
-    })
+    var message = TestMessage.create(payload)
+    var buffer = TestMessage.encode(message).finish();
+    res.send(buffer)
+})
+
+app.get('/regular', (req, res)=>{
+    res.send(testdata)
 })
 
 // catch 404 and forward to error handler

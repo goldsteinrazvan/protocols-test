@@ -13,21 +13,21 @@ var api = require('./routes/api');
 
 var app = express();
 
-(function (){
-    setInterval( function(){
-        axios.get('http://localhost:3000/proto', {responseType: 'arraybuffer'})
-        .then( (response) =>{
-            //console.log(response.data)
-            var data = response.data
-            protobuf.load('./proto/testmessage.proto', (err, root)=>{
-                var TestMessage = root.lookupType('TestMessage')
+protobuf.load('./proto/testmessage.proto', (err, root)=>{
+    var TestMessage = root.lookupType('TestMessage')
+        setInterval( function(){
+            axios.get('http://localhost:3000/proto', {responseType: 'arraybuffer'})
+            .then( (response) =>{
+                //console.log(response.data)
+                var data = response.data
                 var message = TestMessage.decode(data)
                 message = TestMessage.toObject(message)
                 console.log(message)
             })
-        })
-    }, 10000)
-})();
+        }, 10000)
+    
+})
+
 
 
 // view engine setup
