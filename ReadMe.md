@@ -1,9 +1,21 @@
 # Protocols Test
 
 A small test using WebSockets and Protobuf to send a static JSON.
+* [How to Use](#how-to-use)
 * [Comparing WebSocket to Protobuf](#comparing-websocket-to-protobuf)
 * [WebSocket - Advantages and Disadvantages](#websocket-advantages-and-disadvantages)
 * [Protobuf - Advantages and Disadvantages](#protobuf-advantages-and-disadvantages)
+
+
+## How to use 
+* Need to have `nodemon` installed. 
+    * To install nodemon globally, run `npm install -g nodemon`
+### Websockets 
+* **Server**: cd into `websockets/server/` , run `npm install` , then run `nodemon start`.  
+* **Client**: cd into `websockets/client/` , run `npm install` , then run `nodemon start`. 
+### Protobuf 
+* **Server**: cd into `protobuf/server/` , run `npm install` , then run `nodemon start`.  
+* **Client**: cd into `protobuf/client/` , run `npm install` , then run `nodemon start`. 
 
 ## Comparing WebSocket to Protobuf 
 According to the definition, [Websocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) is a communication protocol that allows the client and the server to have a two-way communication session: you can send messages to a server and receive event-driven responses without requesting them explicitly from the server (compare this to the http model).
