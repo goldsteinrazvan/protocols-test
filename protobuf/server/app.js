@@ -5,16 +5,20 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator')
 var cors = require('cors')
+
+//load protobuf library and static JSON
 var protobuf = require('protobufjs');
 var testdata = require('./utils/testdata')
 var TestMessage;
 
 var app = express();
 
+//compile protobuf schema to use it later when encoding and decoding message
 protobuf.load('./proto/testmessage.proto', (err, root) => {
     TestMessage = root.lookupType('TestMessage')
 })
 
+//setup middlewares to use
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,6 +29,7 @@ app.use(cors())
 
 app.options('*', cors())
 
+//route to send the static JSON protobuf encoded
 app.get('/proto', (req, res)=>{
     var payload = testdata
     var errMsg = TestMessage.verify(payload)
@@ -37,6 +42,7 @@ app.get('/proto', (req, res)=>{
     res.send(buffer)
 })
 
+//route to send static JSON as it is. Used for benchmarking
 app.get('/regular', (req, res)=>{
     res.send(testdata)
 })

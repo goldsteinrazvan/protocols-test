@@ -1,5 +1,6 @@
 var faker = require('faker')
 
+//function to generate JSON with random data in fields
 function generateJSON(){
     var data = {}
     data.id = faker.random.uuid()

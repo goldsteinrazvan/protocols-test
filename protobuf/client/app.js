@@ -4,19 +4,19 @@ var axios = require('axios')
 
 var app = express();
 
+//compile protobuf schema and send get requests every 10 seconds
+//decodes the response to regular JSON object
 protobuf.load('./proto/testmessage.proto', (err, root)=>{
     var TestMessage = root.lookupType('TestMessage')
-        setInterval( function(){
-            axios.get('http://localhost:3000/proto', {responseType: 'arraybuffer'})
-            .then( (response) =>{
-                //console.log(response.data)
-                var data = response.data
-                var message = TestMessage.decode(data)
-                message = TestMessage.toObject(message)
-                console.log(message)
-            })
-        }, 10000)
-    
+    setInterval( function(){
+        axios.get('http://localhost:3000/proto', {responseType: 'arraybuffer'})
+        .then( (response) =>{
+            var data = response.data
+            var message = TestMessage.decode(data)
+            message = TestMessage.toObject(message)
+            console.log(message)
+        })
+    }, 10000)
 })
 
 // catch 404 and forward to error handler
